@@ -12,7 +12,7 @@
         <select name="gameId" id="gameId">
             <?php
             // connect
-            $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
+            $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
 
             // set up, run query, & store results
             $sql = "SELECT * FROM games ORDER BY title";

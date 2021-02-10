@@ -7,7 +7,7 @@
 <body>
 <?php
 // 1. Connect to your AWS db, using the credentials you received via email:  Host – 172.31.22.43 / Database – your-db-name / Username – your-username / Password – your-password
-$db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
+$db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
 
 // 2. Write the SQL Query to read all the records from the games table
 $sql = "select * from games";
