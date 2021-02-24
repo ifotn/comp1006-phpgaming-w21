@@ -9,7 +9,7 @@
 <body>
 <?php
 // 1. Connect to your AWS db, using the credentials you received via email:  Host – 172.31.22.43 / Database – your-db-name / Username – your-username / Password – your-password
-$db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
+$db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
 
 // 2. Write the SQL Query to read all the records from the games table
 $sql = "select * from games";
@@ -28,7 +28,8 @@ echo '<table class="table table-striped table-hover"><thead><th>Title</th><th>Re
 // 5. Use a foreach loop to iterate (cycle) through all the values in the $games variable.  Inside this loop, use an echo command to display the title of each game.  See https://www.php.net/manual/en/control-structures.foreach.php for details.
 // <tr> creates a new table row; <td> creates a new table cell or column ("table data")
 foreach ($games as $v){
-    echo '<tr><td>' . $v['title'] . '</td>
+    echo '<tr><td><a href="game-details.php?gameId=' . $v['gameId'] . '">
+        ' . $v['title'] . '</a></td>
         <td>' . $v['releaseYear'] . '</td>
         <td>' . $v['rating'] . '</td>
         <td><a href="delete-game.php?gameId=' . $v['gameId'] .'" 
