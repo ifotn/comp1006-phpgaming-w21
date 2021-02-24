@@ -11,6 +11,7 @@ $title = $_POST['title'];
 $releaseYear = $_POST['releaseYear'];
 $rating = $_POST['rating'];
 $publisherId = $_POST['publisherId'];
+$gameId = $_POST['gameId'];
 // add variable to indicate if we should save or not
 $ok = true;
 
@@ -44,11 +45,19 @@ else {
 
 if ($ok == true) {
     // connect to the db
-    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
+    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
 
-    // set up the SQL INSERT command to add a new game.  : indicates a placeholder or paramter
-    $sql = "INSERT INTO games (title, releaseYear, rating, publisherId) VALUES 
-            (:title, :releaseYear, :rating, :publisherId)";
+    // if gameId, update existing record
+    if (!empty($gameId)) {
+        $sql = "UPDATE games SET title = :title, releaseYear = :releaseYear,
+            rating = :rating, publisherId = :publisherId WHERE gameId = :gameId";
+    }
+    else {
+        // if no gameId, add new record
+        // set up the SQL INSERT command to add a new game.  : indicates a placeholder or paramter
+        $sql = "INSERT INTO games (title, releaseYear, rating, publisherId) VALUES 
+                (:title, :releaseYear, :rating, :publisherId)";
+    }
 
     // fill the INSERT parameters with our variables
     // connect the db connection w/the SQL command
@@ -57,6 +66,9 @@ if ($ok == true) {
     $cmd->bindParam(':releaseYear', $releaseYear, PDO::PARAM_INT);
     $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 10);
     $cmd->bindParam(':publisherId', $publisherId, PDO::PARAM_INT);
+    if (!empty($gameId)) {
+        $cmd->bindParam(':gameId', $gameId, PDO::PARAM_INT);
+    }
 
     // execute the save
     $cmd->execute();
@@ -65,6 +77,7 @@ if ($ok == true) {
     $db = null;
 
     echo "Game Saved";
+    header('location:games.php');
 }
 ?>
 </body>

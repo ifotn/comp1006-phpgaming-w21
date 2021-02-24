@@ -36,7 +36,7 @@ if (!empty($_GET['gameId'])) {
     $gameId = $_GET['gameId'];
 
     // look up the selected game in the db
-    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
+    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
     $sql = "SELECT * FROM games WHERE gameId = :gameId";
     $cmd = $db->prepare($sql);
     $cmd->bindParam(':gameId', $gameId, PDO::PARAM_INT);
@@ -73,7 +73,7 @@ else {
             <select name="publisherId" id="publisherId">
                 <?php
                 // connect
-                $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
+                $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
 
                 // set up & run query to get all publishers
                 $sql = "SELECT * FROM publishers ORDER BY name";
@@ -83,7 +83,12 @@ else {
 
                 // add each publisher to the list
                 foreach ($publishers as $p) {
-                    echo '<option value="' . $p['publisherId'] . '">' . $p['name'] . '</option>';
+                    if ($game['publisherId'] == $p['publisherId']) {
+                        echo '<option selected value="' . $p['publisherId'] . '">' . $p['name'] . '</option>';
+                    }
+                    else {
+                        echo '<option value="' . $p['publisherId'] . '">' . $p['name'] . '</option>';
+                    }
                 }
 
                 // disconnect
@@ -91,6 +96,7 @@ else {
                 ?>
             </select>
         </fieldset>
+        <input name="gameId" id="gameId" type="hidden" value="<?php echo $game['gameId']; ?>" />
         <button class="offset-3 btn btn-primary p-2">Save</button>
     </form>
 </main>
