@@ -1,42 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Game Details</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-</head>
-<body>
-<nav class="navbar navbar-dark bg-primary">
-    <!-- Navbar content -->
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">PHP Gaming</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-            </ul>
-            <span class="navbar-text">
-        Navbar text with an inline element
-      </span>
-        </div>
-</nav>
+<?php
+$title = 'Game Details';
+include 'header.php'; ?>
+
 <?php
 // check if adding or editing.  if editing, get values to populate the form
 if (!empty($_GET['gameId'])) {
     $gameId = $_GET['gameId'];
 
     // look up the selected game in the db
-    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
+    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
     $sql = "SELECT * FROM games WHERE gameId = :gameId";
     $cmd = $db->prepare($sql);
     $cmd->bindParam(':gameId', $gameId, PDO::PARAM_INT);
@@ -73,7 +45,7 @@ else {
             <select name="publisherId" id="publisherId">
                 <?php
                 // connect
-                $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
+                $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
 
                 // set up & run query to get all publishers
                 $sql = "SELECT * FROM publishers ORDER BY name";

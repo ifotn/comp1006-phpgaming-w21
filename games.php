@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Games</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <script type="text/javascript" src="js/scripts.js"></script>
-</head>
-<body>
+<?php
+$title = 'Our Games';
+include 'header.php'; ?>
+
 <h1>Our Games</h1>
 <a href="game-details.php">Add a New Game</a>
 
 <?php
 // 1. Connect to your AWS db, using the credentials you received via email:  Host – 172.31.22.43 / Database – your-db-name / Username – your-username / Password – your-password
-$db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
+$db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
 
 // 2. Write the SQL Query to read all the records from the games table
 $sql = "SELECT games.*, publishers.name FROM games 

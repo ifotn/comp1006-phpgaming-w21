@@ -45,7 +45,7 @@ else {
 
 if ($ok == true) {
     // connect to the db
-    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', '');
+    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
 
     // if gameId, update existing record
     if (!empty($gameId)) {
