@@ -22,6 +22,7 @@ else {
     $game = null;
 }
 ?>
+
 <main class="container">
     <h1>Game Details</h1>
     <form method="post" action="save-game.php">
