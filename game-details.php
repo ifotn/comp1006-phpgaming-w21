@@ -7,15 +7,23 @@ include 'header.php'; ?>
 if (!empty($_GET['gameId'])) {
     $gameId = $_GET['gameId'];
 
-    // look up the selected game in the db
-    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
-    $sql = "SELECT * FROM games WHERE gameId = :gameId";
-    $cmd = $db->prepare($sql);
-    $cmd->bindParam(':gameId', $gameId, PDO::PARAM_INT);
-    $cmd->execute();
-    // use fetch not fetchAll as we're only selecting a single record & don't need a loop
-    $game = $cmd->fetch();
-    $db = null;
+    try {
+        // look up the selected game in the db
+        include 'db.php';
+        $sql = "SELECT * FROM games WHERE gameId = :gameId";
+        $cmd = $db->prepare($sql);
+        $cmd->bindParam(':gameId', $gameId, PDO::PARAM_INT);
+        $cmd->execute();
+        // use fetch not fetchAll as we're only selecting a single record & don't need a loop
+        $game = $cmd->fetch();
+        $db = null;
+    }
+    catch (exception $e) {
+
+        // redirect to error page instead of showing the error details
+        header('location:error.php');
+        exit(); // stop code execution now
+    }
 }
 else {
     // if no id, we are adding, so initialize the $game variable to null
@@ -45,27 +53,35 @@ else {
             <label for="publisherId" class="col-2">Publisher:</label>
             <select name="publisherId" id="publisherId">
                 <?php
-                // connect
-                $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100', 'Rich100', 'Vda787-KJ_');
+                try {
+                    // connect
+                    include 'db.php';
 
-                // set up & run query to get all publishers
-                $sql = "SELECT * FROM publishers ORDER BY name";
-                $cmd = $db->prepare($sql);
-                $cmd->execute();
-                $publishers = $cmd->fetchAll();
+                    // set up & run query to get all publishers
+                    $sql = "SELECT * FROM publishers ORDER BY name";
+                    $cmd = $db->prepare($sql);
+                    $cmd->execute();
+                    $publishers = $cmd->fetchAll();
 
-                // add each publisher to the list
-                foreach ($publishers as $p) {
-                    if ($game['publisherId'] == $p['publisherId']) {
-                        echo '<option selected value="' . $p['publisherId'] . '">' . $p['name'] . '</option>';
+                    // add each publisher to the list
+                    foreach ($publishers as $p) {
+                        if ($game['publisherId'] == $p['publisherId']) {
+                            echo '<option selected value="' . $p['publisherId'] . '">' . $p['name'] . '</option>';
+                        }
+                        else {
+                            echo '<option value="' . $p['publisherId'] . '">' . $p['name'] . '</option>';
+                        }
                     }
-                    else {
-                        echo '<option value="' . $p['publisherId'] . '">' . $p['name'] . '</option>';
-                    }
+
+                    // disconnect
+                    $db = null;
                 }
+                catch (exception $e) {
 
-                // disconnect
-                $db = null;
+                    // redirect to error page instead of showing the error details
+                    header('location:error.php');
+                    exit(); // stop code execution now
+                }
                 ?>
             </select>
         </fieldset>

@@ -20,7 +20,7 @@ if (empty(trim($name))) { // use trim to remove leading & trailing spaces
 
 if ($ok == true) {
 //connect to the db
-    $db = new PDO('mysql:host=172.31.22.43;dbname=Rich100','Rich100','Vda787-KJ_');
+include 'db.php';
 
 //set up the sql insert command to add a new game :indicates a placeholder or parameter
     $sql = "INSERT INTO publishers (name) VALUES (:name)";
