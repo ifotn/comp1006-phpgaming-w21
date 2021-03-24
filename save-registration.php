@@ -28,6 +28,19 @@ if ($ok) {
     // connect
     include 'db.php';
 
+    // check if user already exists
+    $sql = "SELECT * FROM users WHERE username = :username";
+    $cmd = $db->prepare($sql);
+    $cmd->bindParam(':username', $username, PDO::PARAM_STR, 50);
+    $cmd->execute();
+    $user = $cmd->fetch();
+
+    if (!empty($user)) {
+        echo '<h5 class="alert alert-danger">User already exists</h5>';
+        $db = null;
+        exit(); // stop processing more code
+    }
+
     // set up SQL
     $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
 
