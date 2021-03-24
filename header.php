@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>PHP Gaming | <?php echo $title; ?></title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <script type="text/javascript" src="js/scripts.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
@@ -19,11 +20,13 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="games.php">Our Games</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
+                    <a class="nav-link" href="register.php">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="login.php">Login</a>
                 </li>
             </ul>
         </div>
