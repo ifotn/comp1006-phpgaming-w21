@@ -19,10 +19,12 @@ include 'header.php';
         <fieldset class="form-group">
             <label for="confirm" class="col-2">Confirm Password:</label>
             <input type="password" name="confirm" id="confirm" required
-                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                onkeyup="return comparePasswords();" />
+            <span id="pwMsg"></span>
         </fieldset>
         <div class="offset-3">
-            <button class="btn btn-primary">Register</button>
+            <button class="btn btn-primary" onclick="return comparePasswords();">Register</button>
         </div>
     </form>
 </main>
