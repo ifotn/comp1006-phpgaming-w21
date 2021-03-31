@@ -6,6 +6,8 @@
 </head>
 <body>
 <?php
+include 'auth.php';
+
 // store the values entered in the form in variables
 $title = $_POST['title'];
 $releaseYear = $_POST['releaseYear'];

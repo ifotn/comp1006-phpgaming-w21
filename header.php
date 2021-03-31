@@ -22,12 +22,30 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="register.php">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
+                <?php
+                // access current session 1st
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                }
+
+                if (empty($_SESSION['username'])) {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                <?php
+                }
+                else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><?php echo $_SESSION['username']; ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
     </div>

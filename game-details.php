@@ -1,4 +1,7 @@
 <?php
+// auth check
+include 'auth.php';
+
 $title = 'Game Details';
 include 'header.php'; ?>
 

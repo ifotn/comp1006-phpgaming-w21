@@ -3,9 +3,11 @@ $title = 'Our Games';
 include 'header.php'; ?>
 
 <h1>Our Games</h1>
-<a href="game-details.php">Add a New Game</a>
-
 <?php
+if (!empty($_SESSION['username'])) {
+    echo '<a href="game-details.php">Add a New Game</a>';
+}
+
 try {
     // 1. Connect to your AWS db, using the credentials you received via email:  Host – 172.31.22.43 / Database – your-db-name / Username – your-username / Password – your-password
     include 'db.php';
@@ -29,19 +31,30 @@ try {
             <th>Release Year</th>
             <th>Rating</th>
             <th>Publisher</th>        
-            <th>Actions</th>
+            <th></th>
         </thead>';
 
     // 5. Use a foreach loop to iterate (cycle) through all the values in the $games variable.  Inside this loop, use an echo command to display the title of each game.  See https://www.php.net/manual/en/control-structures.foreach.php for details.
     // <tr> creates a new table row; <td> creates a new table cell or column ("table data")
     foreach ($games as $v) {
-        echo '<tr><td><a href="game-details.php?gameId=' . $v['gameId'] . '">
-            ' . $v['title'] . '</a></td>
+        echo '<tr><td>';
+        if (!empty($_SESSION['username'])) {
+            echo '<a href="game-details.php?gameId=' . $v['gameId'] . '">
+                ' . $v['title'] . '</a>';
+        }
+        else {
+            echo $v['title'];
+        }
+        echo '</td>
             <td>' . $v['releaseYear'] . '</td>
             <td>' . $v['rating'] . '</td>
             <td>' . $v['name'] . '</td>
-            <td><a href="delete-game.php?gameId=' . $v['gameId'] . '" 
-                class="btn btn-danger" onclick="return yaSure();">Delete</a></td></tr>';
+            <td>';
+        if (!empty($_SESSION['username'])) {
+            echo '<a href="delete-game.php?gameId=' . $v['gameId'] . '" 
+                class="btn btn-danger" onclick="return yaSure();">Delete</a>';
+        }
+        echo '</td></tr>';
     }
 
     // 5a. Close the table

@@ -6,6 +6,8 @@
 </head>
 <body>
 <?php
+include 'auth.php';
+
 // get the selected gameId from the url parameter using the $_GET array
 $gameId = $_GET['gameId'];
 
