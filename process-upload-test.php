@@ -23,6 +23,9 @@ if ($_FILES['myFile']['name'] != null) {
     //$type = $_FILES['myFile']['type']; - don't use this as it can be spoofed
     $type = mime_content_type($tmp_name);
     echo "Type: $type<br />";
+
+    // move the file to the uploads directory
+    move_uploaded_file($tmp_name, "uploads/$name");
 }
 else {
     echo 'No file uploaded';

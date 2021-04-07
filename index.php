@@ -9,6 +9,9 @@ include 'header.php';
     <p>Source Code available on
         <a href="https://github.com/ifotn/comp1006-phpgaming-w21.git">GitHub</a>.
     </p>
+    <p>All game images sourced from
+        <a href="https://wikipedia.org" target="_blank">Wikipedia</a>.
+    </p>
 </main>
 </body>
 </html>

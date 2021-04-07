@@ -45,6 +45,28 @@ else {
     }
 }
 
+// photo upload
+$photo = null;
+
+if ($_FILES['photo']['name'] != null) {
+    // get the file name
+    $photo = $_FILES['photo']['name'];
+
+    // get temp location
+    $tmp_name = $_FILES['photo']['tmp_name'];
+
+    // verify file is an image
+    $type = mime_content_type($tmp_name);
+    if ($type != "image/png" && $type != "image/jpeg") {
+        echo 'Please upload a .jpg or .png file<br />';
+        $ok = false;
+    }
+    else {
+        // file is valid so move to img/game-uploads
+        move_uploaded_file($tmp_name, "img/game-uploads/$photo");
+    }
+}
+
 if ($ok == true) {
     try {
         // connect to the db
@@ -57,8 +79,8 @@ if ($ok == true) {
         } else {
             // if no gameId, add new record
             // set up the SQL INSERT command to add a new game.  : indicates a placeholder or paramter
-            $sql = "INSERT INTO games (title, releaseYear, rating, publisherId) VALUES 
-                    (:title, :releaseYear, :rating, :publisherId)";
+            $sql = "INSERT INTO games (title, releaseYear, rating, publisherId, photo) VALUES 
+                    (:title, :releaseYear, :rating, :publisherId, :photo)";
         }
 
         // fill the INSERT parameters with our variables
@@ -68,6 +90,7 @@ if ($ok == true) {
         $cmd->bindParam(':releaseYear', $releaseYear, PDO::PARAM_INT);
         $cmd->bindParam(':rating', $rating, PDO::PARAM_STR, 10);
         $cmd->bindParam(':publisherId', $publisherId, PDO::PARAM_INT);
+        $cmd->bindParam(':photo', $photo, PDO::PARAM_STR,100);
         if (!empty($gameId)) {
             $cmd->bindParam(':gameId', $gameId, PDO::PARAM_INT);
         }

@@ -36,7 +36,7 @@ else {
 
 <main class="container">
     <h1>Game Details</h1>
-    <form method="post" action="save-game.php">
+    <form method="post" action="save-game.php" enctype="multipart/form-data">
         <fieldset class="p-2">
             <label for="title" class="col-2">Title: </label>
             <input name="title" id="title" required maxlength="50"
@@ -87,6 +87,10 @@ else {
                 }
                 ?>
             </select>
+        </fieldset>
+        <fieldset class="p-2">
+            <label for="photo" class="col-2">Photo:</label>
+            <input name="photo" id="photo" type="file" accept=".png,.jpg,jpeg" />
         </fieldset>
         <input name="gameId" id="gameId" type="hidden" value="<?php echo $game['gameId']; ?>" />
         <button class="offset-3 btn btn-primary p-2">Save</button>
