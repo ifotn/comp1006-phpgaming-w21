@@ -1,3 +1,7 @@
 .form-group {
     padding: 10px;
 }
+
+.thumbnail {
+   height: 100px;
+}

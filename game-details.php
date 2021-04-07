@@ -92,7 +92,17 @@ else {
             <label for="photo" class="col-2">Photo:</label>
             <input name="photo" id="photo" type="file" accept=".png,.jpg,jpeg" />
         </fieldset>
+        <?php
+        // display photo if there is one
+        if ($game['photo'] != null) {
+            echo '<div>
+                <img class="offset-2 thumbnail" src="img/game-uploads/' . $game['photo'] . '" 
+                alt="Game Image" />
+                </div>';
+        }
+        ?>
         <input name="gameId" id="gameId" type="hidden" value="<?php echo $game['gameId']; ?>" />
+        <input name="currentPhoto" id="currentPhoto" type="hidden" value="<?php echo $game['photo']; ?>" />
         <button class="offset-3 btn btn-primary p-2">Save</button>
     </form>
 </main>

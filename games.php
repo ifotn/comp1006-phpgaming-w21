@@ -28,6 +28,7 @@ try {
     echo '<table class="table table-striped table-hover">
         <thead>
             <th>Title</th>
+            <th></th>
             <th>Release Year</th>
             <th>Rating</th>
             <th>Publisher</th>        
@@ -45,8 +46,15 @@ try {
         else {
             echo $v['title'];
         }
-        echo '</td>
-            <td>' . $v['releaseYear'] . '</td>
+        echo '</td>';
+        echo '<td>';
+        if ($v['photo'] != null) {
+            echo '<img src="img/game-uploads/' . $v['photo'] . '" alt="Game Image"
+                class="thumbnail">';
+        }
+
+        echo '</td>';
+        echo   '<td>' . $v['releaseYear'] . '</td>
             <td>' . $v['rating'] . '</td>
             <td>' . $v['name'] . '</td>
             <td>';

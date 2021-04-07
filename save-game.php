@@ -62,9 +62,13 @@ if ($_FILES['photo']['name'] != null) {
         $ok = false;
     }
     else {
-        // file is valid so move to img/game-uploads
+        // file is valid so move to img/game-uploads using the session Id
+        $photo = session_id() . "-" . $photo;
         move_uploaded_file($tmp_name, "img/game-uploads/$photo");
     }
+}
+else {
+    $photo = $_POST['currentPhoto'];
 }
 
 if ($ok == true) {
@@ -75,7 +79,8 @@ if ($ok == true) {
         // if gameId, update existing record
         if (!empty($gameId)) {
             $sql = "UPDATE games SET title = :title, releaseYear = :releaseYear,
-                rating = :rating, publisherId = :publisherId WHERE gameId = :gameId";
+                rating = :rating, publisherId = :publisherId,
+                 photo = :photo WHERE gameId = :gameId";
         } else {
             // if no gameId, add new record
             // set up the SQL INSERT command to add a new game.  : indicates a placeholder or paramter
