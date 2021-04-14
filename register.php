@@ -32,6 +32,18 @@ include 'header.php';
 
 <!-- recaptcha js api -->
 <script src="https://www.google.com/recaptcha/api.js?render=6LdEx6kaAAAAABfsOaUmhE-sAud-iYRDifaLnbRo"></script>
+<script type="text/javascript">
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LdEx6kaAAAAABfsOaUmhE-sAud-iYRDifaLnbRo', { action: 'register' })
+        .then(function(token) {
+            // get token response from google api and put value in our hidden field
+            var recaptchaRespose = document.getElementById('recaptchaResponse');
+            recaptchaRespose.value = token;
+            // just for testing
+            //alert(token)
+        })
+    })
+</script>
 </body>
 </html>
 
