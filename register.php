@@ -26,9 +26,12 @@ include 'header.php';
         <div class="offset-3">
             <button class="btn btn-primary" onclick="return comparePasswords();">Register</button>
         </div>
+        <input type="hidden" name="recaptchaResponse" id="recaptchaResponse" />
     </form>
 </main>
 
+<!-- recaptcha js api -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LdEx6kaAAAAABfsOaUmhE-sAud-iYRDifaLnbRo"></script>
 </body>
 </html>
 
